@@ -1,2 +1,2 @@
 # Leetcode
-Leetcode all Solution 
+Leetcode all Solution with brief description
