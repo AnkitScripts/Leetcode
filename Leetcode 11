@@ -19,3 +19,8 @@ class Main{
     System.out.println(s.maxArea(arr));
    }
 }
+
+//Concept of Two pointer
+Time: O(n)
+Space : O(1)
+Straightforward, dont overthink
