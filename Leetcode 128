@@ -1,0 +1,55 @@
+//Solution 1 is based on using copy of HashMap as we cannot update data strcuture while iterating it.
+//Solution is bit straight forward
+//Both solution has O(n) time complexity and space complexity
+//Concept is use of Hashing
+
+//Solution 1{only function}
+
+class Solution {
+    public int longestConsecutive(int[] nums) {
+        if(nums.length==0)return 0;
+        int l=1;
+        HashMap<Integer,Integer>track = new HashMap<>();
+        HashMap<Integer,Integer>copy = new HashMap<>();
+        for(int i=0;i<nums.length;i++){
+            track.put(nums[i],1);
+            copy.put(nums[i],1);
+        }
+        for(int key: track.keySet()){
+            if(track.containsKey(key-1)&&copy.containsKey(key-1)){
+                while(copy.containsKey(key-copy.get(key))){    
+                    int value= copy.get(key-copy.get(key));
+                    copy.remove(key-copy.get(key));
+                    l = Math.max(l, value+copy.get(key));
+                    copy.put(key,value+copy.get(key));
+                }
+            }
+        }
+        return l;
+    }
+}
+
+
+
+//Solution 2
+
+class Solution {
+
+    public int longestConsecutive(int[] nums) {
+        if (nums.length == 0) return 0;
+        HashSet<Integer> set = new HashSet<>();
+        int ans = 1;
+        for (int num : nums) set.add(num);
+        for (int num : nums) {
+            if (!set.contains(num - 1)) {
+                int count = 1;
+                while (set.contains(num + 1)) {
+                    num++;
+                    count++;
+                }
+                ans = Math.max(count, ans);
+            }
+        }
+        return ans;
+    }
+}
